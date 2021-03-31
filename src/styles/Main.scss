@@ -1,0 +1,642 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default padding */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+html,
+body {
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: 1px; /* Firefox */
+  overflow: hidden;
+}
+
+#root {
+  height: auto;
+  min-height: 100vh;
+  overflow: hidden;
+}
+::-webkit-scrollbar {
+  scrollbar-width: 1px;
+}
+
+/* Remove list styles on ul, ol elements with a class attribute */
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Natural flow and rhythm in articles by default */
+article > * + * {
+  margin-top: 1em;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// MAIN
+
+.Main {
+  min-height: 100vh;
+  min-width: 100vw;
+  background: rgb(228, 230, 255);
+}
+
+.hero {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  padding: 0 10.84vw;
+  text-align: center;
+  outline: 0;
+
+  & > div.container {
+    max-width: 900px;
+    width: 46.875vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
+      "Helvetica Neue", sans-serif;
+    text-align: center;
+    outline: 0;
+
+    & > img {
+      margin-bottom: 3.22vw;
+      width: 100%;
+    }
+
+    & > h1 {
+      font-weight: 400;
+      color: black;
+      margin-bottom: 1.6vw;
+      font-size: 2.8vw;
+    }
+
+    & > h2 {
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 1.8vw;
+
+      & > a {
+        color: rgb(160, 4, 30);
+        font-weight: bold;
+        text-decoration: none;
+      }
+    }
+
+    & > p {
+      font-weight: 400;
+      color: white;
+      padding: 0.5vw;
+      background-color: rgba(0, 0, 0, 0.7);
+      font-size: 1.8vw;
+      border-radius: 0.5vw;
+      padding-bottom: 0.6vw;
+      margin-top: 3vw;
+    }
+
+    & > div.button-container {
+      margin-top: 3.42vw;
+      width: 100%;
+      height: 5.775vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+
+      & > button {
+        cursor: pointer;
+        font-weight: 700;
+        outline: 0;
+        border: 1px solid transparent;
+        background-color: rgb(160, 4, 30);
+        box-shadow: rgb(0 0 0 / 10%) 0px 0.407vw 1.626vw 0px;
+        height: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        border-radius: 0.342vw;
+        padding: 1.084vw 1.7vw;
+        font-size: 2vw;
+      }
+
+      & > p {
+        position: absolute;
+        right: 17%;
+        font-size: 1.226vw;
+      }
+    }
+  }
+} 
+
+.question {
+  height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+
+  & > div.question-container {
+    height: 50%;
+    margin-bottom: 2.5vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > div.question-content {
+      height: 100%;
+      margin-bottom: 2.5vh;
+      padding: 0 15vw;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+
+      & > div.question-headers {
+        height: 40%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+        position: relative;
+
+        & > div.question-index {
+          position: absolute;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          left: -7.5%;
+          top: 27.5%;
+
+          & > p {
+            font-size: 2vw;
+            color: rgb(160, 4, 30);
+          }
+
+          & > img {
+            height: 2.4vw;
+            margin-top: 2%;
+          }
+        }
+
+        & > h2 {
+          font-size: 2.4vw;
+          font-weight: 400;
+        }
+
+        & > h3 {
+          font-size: 1.6vw;
+          font-weight: 400;
+          color: rgba(0, 0, 0, 0.7);
+        }
+
+        & > strong {
+          color: rgba(0, 0, 0, 0.7);
+        }
+      }
+
+      & > div.question-input {
+        height: 60%;
+        width: 100%;
+        padding: 2.051vw 0 0 0;
+
+        & > input {
+          width: 100%;
+          padding: 0 0 1.013vw;
+          border: 0;
+          outline: 0;
+          font-size: 3vw;
+          -webkit-text-fill-color: rgba(221, 46, 68, 0.3);
+          color: rgb(221, 46, 68);
+          box-shadow: rgb(221 46 68 / 30%) 0px 1px;
+          background: transparent !important;
+          transition: background-color 1e8s ease 0s, box-shadow 0.1s ease-out 0s;
+
+          &:focus {
+            box-shadow: rgb(221 46 68) 0px 2px;
+          }
+          &.active {
+            -webkit-text-fill-color: rgb(221, 46, 68);
+          }
+        }
+
+        & > div.button-container {
+          width: 100%;
+          height: 3.775vw;
+          margin-top: 2.5%;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          position: relative;
+
+          & > button {
+            cursor: pointer;
+            font-weight: 700;
+            outline: 0;
+            border: 1px solid transparent;
+            background-color: rgb(160, 4, 30);
+            box-shadow: rgb(0 0 0 / 10%) 0px 0.407vw 1.626vw 0px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            border-radius: 0.542vw;
+            padding: 1vw 2vw;
+            font-size: 2vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            & > img {
+              margin-left: 2%;
+              height: 85%;
+            }
+          }
+
+          & > p {
+            position: absolute;
+            left: 20%;
+            font-size: 1.426vw;
+          }
+        }
+      }
+    }
+  }
+}
+
+.QuestionsPopup {
+  position: absolute;
+  width: 100%;
+  padding: 0 0 0 70%;
+  height: 2vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+
+  & > div.awnsers {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+
+    & > p {
+      font-size: 1vw;
+    }
+
+    & > div.line {
+      width: 100%;
+      height: 0.542vw;
+      display: flex;
+      border-radius: 0.542vw;
+      background-color: rgba(0, 0, 0, 0.1);
+
+      & > div.chunk {
+        width: 25%;
+        height: 100%;
+        background: none;
+        transition: all 200ms;
+
+        &:first-child {
+          border-top-left-radius: 0.542vw;
+          border-bottom-left-radius: 0.542vw;
+        }
+
+        &:last-child {
+          border-top-right-radius: 0.542vw;
+          border-bottom-right-radius: 0.542vw;
+        }
+      }
+
+      & > div.chunk.active {
+        background: rgb(0, 0, 0);
+      }
+    }
+  }
+
+  & > div.QuestionManager {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.542vw;
+    margin: 0 5% 0 5%;
+    background-color: rgb(160, 4, 30);
+
+    & > h4 {
+      width: 70%;
+      text-align: center;
+      cursor: pointer;
+      font-weight: 400;
+      outline: 0;
+      border: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 1.2vw;
+      border-top-left-radius: 0.542vw;
+      border-bottom-left-radius: 0.542vw;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
+      padding: 0 0 2% 0;
+    }
+
+    & > img.icon {
+      width: 15%;
+      height: 100%;
+      border: 0;
+      margin: 0;
+      padding: 0;
+      outline: 0;
+      cursor: pointer;
+
+      &:not(:first-child) {
+        border-top-right-radius: 0.542vw;
+        border-bottom-right-radius: 0.542vw;
+      }
+    }
+  }
+}
+
+//ANIMATION
+.hero-fade-appear {
+  opacity: 0;
+}
+.hero-fade-appear-active {
+  opacity: 1;
+  transition: opacity 400ms;
+}
+
+.hero-fade-enter {
+  opacity: 0;
+}
+.hero-fade-enter-active {
+  opacity: 1;
+  transition: opacity 400ms;
+}
+
+.hero-fade-exit {
+  opacity: 1;
+  position: absolute;
+  top: 0;
+}
+
+.hero-fade-exit-active {
+  opacity: 0;
+  position: absolute;
+  top: -100%;
+  transition: all 400ms;
+}
+
+.hero-fade-exit-done {
+  position: absolute;
+  opacity: 0;
+  top: -100%;
+}
+
+//ANIMATION
+
+.question-fade-enter {
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+}
+
+.question-fade-enter-active {
+  opacity: 1;
+  position: absolute;
+  transition: all 1000ms 200ms;
+  top: 0;
+}
+
+.question-fade-enter-done {
+  position: absolute;
+  top: 0;
+}
+
+.question-fade-exit {
+  opacity: 1;
+  position: absolute;
+  top: 0;
+}
+
+.question-fade-exit-active {
+  opacity: 0;
+  position: absolute;
+  transition: all 1000ms 200ms;
+  top: -100%;
+}
+
+.question-fade-exit-done {
+  opacity: 0;
+  position: absolute;
+  top: -100%;
+}
+
+/////question animation down 2
+
+.question-two-fade-enter {
+  opacity: 0;
+  position: absolute;
+  top: -100%;
+}
+
+.question-two-fade-enter-active {
+  opacity: 1;
+  position: absolute;
+  transition: all 1000ms 200ms;
+  top: 0;
+}
+
+.question-two-fade-enter-done {
+  position: absolute;
+  top: 0;
+}
+
+.question-two-fade-exit {
+  opacity: 1;
+  position: absolute;
+  top: 0;
+}
+
+.question-two-fade-exit-active {
+  opacity: 0;
+  position: absolute;
+  transition: all 1000ms 200ms;
+  top: -100%;
+}
+
+.question-two-fade-exit-done {
+  opacity: 0;
+  position: absolute;
+  top: -100%;
+}
+
+//animation 2 !important
+
+.question-two-override-fade-exit {
+  opacity: 1 !important;
+  position: absolute !important;
+  top: 0 !important;
+}
+
+.question-two-override-fade-exit-active {
+  opacity: 0 !important;
+  position: absolute !important;
+  transition: all 1000ms 200ms !important;
+  top: 100% !important;
+}
+
+.question-two-override-fade-exit-done {
+  opacity: 0 !important;
+  position: absolute !important;
+  top: 100% !important;
+}
+
+////
+.footer-fade-enter {
+  opacity: 0;
+  position: absolute;
+}
+
+.footer-fade-enter-active {
+  opacity: 1;
+  position: absolute;
+  transition: all 1000ms 1400ms;
+  bottom: 3%;
+}
+
+.footer-fade-enter-done {
+  position: absolute;
+  bottom: 3%;
+}
+
+.footer-fade-exit {
+  opacity: 1;
+}
+.footer-fade-exit-active {
+  opacity: 0;
+  transition: opacity 1000ms;
+}
+
+.footer-fade-exit-done {
+  opacity: 0;
+}
+
+/////
+
+.question-button-fade-enter {
+  opacity: 0;
+  bottom: -5%;
+  position: relative;
+}
+
+.question-button-fade-enter-active {
+  opacity: 1;
+  position: relative;
+  bottom: 0%;
+  transition: all 200ms;
+}
+
+.question-button-fade-enter-done {
+  position: relative;
+  bottom: 0%;
+}
+
+.question-button-fade-exit {
+  opacity: 1;
+}
+.question-button-fade-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+.question-button-fade-exit-done {
+  opacity: 0;
+}
