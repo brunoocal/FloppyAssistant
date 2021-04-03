@@ -372,6 +372,10 @@ select {
               width: 80%;
             }
           }
+
+          & > div.button-container.finishModule.jumpQuestion {
+            justify-content: flex-end !important;
+          }
         }
 
         & div.button-container {
@@ -394,7 +398,7 @@ select {
             }
           }
 
-          &.parentYes.continue{
+          &.parentYes.continue {
             width: 35%;
           }
 

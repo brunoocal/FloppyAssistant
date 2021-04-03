@@ -50,12 +50,14 @@ const Main = () => {
           question: "Indica la ID del canal para el mensaje de bienvenida",
           example: "818305326511816745",
           configPath: "bienvenidas.canal",
+          tag: "mensaje-bienvenida",
           response: "",
         },
         {
           question: "Indica el mensaje de bienvenida que quieres utilizar",
           example: "{user}, gracias a tí, ¡ahora somos {memberCount} miembros!",
           configPath: "bienvenidas.mensaje",
+          tag: "mensaje-bienvenida",
           response: "",
         },
         {
@@ -172,12 +174,14 @@ const Main = () => {
           example: "SI / NO",
           buttons: true,
           configPath: "automod.mass_emoji.activado",
+          tag: "mass-emoji",
           response: "",
         },
         {
           question:
             "Indica el número mínimo de emoticonos por mensaje que quieres que sea bloqueado.",
           example: "8",
+          tag: "mass-emoji",
           configPath: "automod.mass_mentions.limite",
           response: "",
         },
@@ -186,6 +190,7 @@ const Main = () => {
             "¿Quieres bloquear el envio masivo de menciones a usuarios/canales/roles?",
           example: "SI / NO",
           buttons: true,
+          tag: "mass-mentions",
           configPath: "automod.block_words.activado",
           response: "",
         },
@@ -193,6 +198,7 @@ const Main = () => {
           question:
             "Indica el número mínimo de menciones por mensaje que quieres que sea bloqueado.",
           example: "5",
+          tag: "mass-mentions",
           configPath: "automod.block_words.limite",
           response: "",
         },

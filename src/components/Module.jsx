@@ -62,6 +62,48 @@ const Module = React.memo(({ data, events }) => {
     events.upIndex();
   };
 
+  const handleJumpTag = () => {
+    const tag = activeQuestion.tag;
+    console.log(tag);
+    let newIndex;
+    moduleData.questions.forEach((question) => {
+      if (question.tag === tag) {
+        if (question.question !== activeQuestion.question) {
+          console.log(question.question);
+          newIndex = moduleData.questions.indexOf(question) + 1;
+        }
+      }
+    });
+    setQuestionAnimationClass("question-fade");
+    setActiveQuestion(moduleData.questions[newIndex]);
+  };
+
+  const handleJumpDownTag = () => {
+    console.log(activeQuestion);
+    const activeQuestionIndex = moduleData.questions.indexOf(
+      moduleData.questions.find(
+        (question) => question.question === activeQuestion.question
+      )
+    );
+    const upQuestion = moduleData.questions[activeQuestionIndex - 1];
+    const tag = upQuestion.tag;
+    let newIndex = activeQuestionIndex - 1;
+    if (
+      moduleData.questions.find((question) => question.tag === tag).question !==
+      upQuestion.question
+    ) {
+      if (
+        moduleData.questions.find((question) => question.tag === tag).skipped
+      ) {
+        newIndex = moduleData.questions.indexOf(
+          moduleData.questions.find((question) => question.tag === tag)
+        );
+      }
+    }
+    setQuestionAnimationClass("question-two-fade");
+    setActiveQuestion(moduleData.questions[newIndex]);
+  };
+
   //-----------------------------------------
   //            CLOSE EVENT HANDLERS
   //-----------------------------------------
@@ -128,6 +170,7 @@ const Module = React.memo(({ data, events }) => {
                     downIndex: handleDownIndex,
                     handleParentResponse: handleSetParentQuestionResponse,
                     nextModule: handleNextModule,
+                    upIndexSkipTag: handleJumpTag,
                   }}
                   setStates={{ setData: setModuleData }}
                   getStates={{ data: moduleData }}
@@ -150,7 +193,10 @@ const Module = React.memo(({ data, events }) => {
               <QuestionsPopup
                 upIndex={handleUpIndex}
                 downIndex={handleDownIndex}
+                handleJumpTag={handleJumpTag}
+                handleJumpDownTag={handleJumpDownTag}
                 questions={moduleData.questions}
+                activeQuestion={activeQuestion}
                 index={respondedQuestions}
               />
             </CSSTransition>

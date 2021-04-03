@@ -98,13 +98,28 @@ const Question = React.forwardRef((props, ref) => {
       const moduleData = getStates.data;
       const newQuestionsData = moduleData.questions.map((question) => {
         if (question.question === questionData.question) {
-          return { ...questionData, response: event.target.value };
+          if (event.jumpQuestion) {
+            return {
+              ...questionData,
+              response: event.target.value,
+              skipped: true,
+            };
+          }
+          return {
+            ...questionData,
+            response: event.target.value,
+            skipped: false,
+          };
         }
         return question;
       });
 
       setStates.setData({ ...moduleData, questions: newQuestionsData });
-      event.nextModule ? events.nextModule() : events.upIndex();
+      event.nextModule
+        ? events.nextModule()
+        : event.jumpQuestion
+        ? events.upIndexSkipTag()
+        : events.upIndex();
     }
   };
 
@@ -278,7 +293,8 @@ const Question = React.forwardRef((props, ref) => {
                   ).question !==
                     getStates.data.questions[
                       getStates.data.questions.length - 1
-                    ].question && (
+                    ].question &&
+                  !questionData.buttons && (
                     <CSSTransition
                       in={inputFocusClassName !== ""}
                       timeout={400}
@@ -326,6 +342,35 @@ const Question = React.forwardRef((props, ref) => {
                           }
                         >
                           Continuar <img src={Check} alt="Check" />
+                        </button>
+                      </div>
+                    </CSSTransition>
+                  )}
+                {Boolean(questionData.tag) &&
+                  getStates.data.questions.find(
+                    (question) => question.tag === questionData.tag
+                  ).question === questionData.question && (
+                    <CSSTransition
+                      in={Boolean(questionData.tag)}
+                      timeout={400}
+                      classNames="question-button-fade"
+                    >
+                      <div
+                        className={`button-container finishModule ${
+                          inputFocusClassName !== "" ? "jumpQuestion" : ""
+                        }`}
+                      >
+                        <button
+                          onClick={() => {
+                            handleKeyDown({
+                              key: "Enter",
+                              target: { value: questionData.response },
+                              jumpQuestion: true,
+                            });
+                          }}
+                        >
+                          {questionData.skipped ? "Saltado" : "Saltar"}
+                          <img src={Check} alt="Check" />
                         </button>
                       </div>
                     </CSSTransition>

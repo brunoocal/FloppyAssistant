@@ -3,7 +3,15 @@ import Up from "../static/images/up.png";
 import Down from "../static/images/down.png";
 import { v4 as uuid } from "uuid";
 
-const QuestionsPopup = ({ upIndex, downIndex, index, questions }) => {
+const QuestionsPopup = ({
+  upIndex,
+  downIndex,
+  index,
+  questions,
+  activeQuestion,
+  handleJumpTag,
+  handleJumpDownTag,
+}) => {
   const styles = {
     width: `calc(100% / ${questions.length})`,
   };
@@ -34,8 +42,28 @@ const QuestionsPopup = ({ upIndex, downIndex, index, questions }) => {
       </div>
       <div className="QuestionManager">
         <h4>Preguntas</h4>
-        <img src={Down} onClick={upIndex} className="icon"></img>
-        <img src={Up} onClick={downIndex} className="icon"></img>
+        <img
+          src={Down}
+          onClick={() => (activeQuestion.skipped ? handleJumpTag() : upIndex())}
+          className="icon"
+        ></img>
+        <img
+          src={Up}
+          onClick={() => {
+            const activeQuestionIndex = questions.indexOf(
+              questions.find(
+                (question) => question.question === activeQuestion.question
+              )
+            );
+            const upQuestion = questions[activeQuestionIndex - 1];
+            if (Boolean(upQuestion)) {
+              Boolean(upQuestion.tag) ? handleJumpDownTag() : downIndex();
+            } else {
+              downIndex();
+            }
+          }}
+          className="icon"
+        ></img>
       </div>
     </div>
   );
