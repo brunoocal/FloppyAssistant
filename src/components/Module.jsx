@@ -20,8 +20,20 @@ const Module = React.memo(({ data, events }) => {
 
   let respondedQuestions = 0;
 
+  let moduleTagFromForEach = "null";
+
   moduleData.questions.forEach((quest) => {
-    if (quest.response) respondedQuestions += 1;
+    if (Boolean(quest.skipped)) {
+      moduleTagFromForEach = quest.tag;
+      console.log(moduleTagFromForEach);
+    }
+    if (quest.tag === moduleTagFromForEach) {
+      respondedQuestions += 1;
+    }
+
+    if (quest.response) {
+      respondedQuestions += 1;
+    }
   });
 
   if (index === -1) {
