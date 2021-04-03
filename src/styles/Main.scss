@@ -197,7 +197,7 @@ select {
       }
     }
   }
-} 
+}
 
 .question {
   height: 100vh;
@@ -237,13 +237,37 @@ select {
         flex-direction: column;
         position: relative;
 
+        &.parentQuestion {
+          align-items: center;
+          text-align: center;
+          & > h2 {
+            font-size: 3vw;
+            font-weight: 400;
+          }
+        }
+
         & > div.question-index {
           position: absolute;
           display: flex;
           justify-content: center;
           align-items: center;
           left: -7.5%;
-          top: 27.5%;
+          top: 37.5%;
+
+          &.parentQuestion {
+            position: static;
+
+            & > p {
+              font-size: 3vw;
+              color: rgb(160, 4, 30);
+            }
+
+            & > img {
+              height: 3vw;
+              margin-top: 2%;
+              transform: rotate(90deg);
+            }
+          }
 
           & > p {
             font-size: 2vw;
@@ -277,6 +301,34 @@ select {
         width: 100%;
         padding: 2.051vw 0 0 0;
 
+        &.parentQuestion {
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          padding: 2.051vw 0;
+        }
+
+        & > .YesNoButtons {
+          width: 100%;
+          height: 40%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: row;
+          padding: 0 33% 0 0;
+          & > div {
+            width: 50% !important;
+            justify-content: center !important;
+            align-items: flex-start !important;
+            margin: 0 !important;
+            height: 100% !important;
+            & > button {
+              height: 70% !important;
+              width: 55% !important;
+            }
+          }
+        }
+
         & > input {
           width: 100%;
           padding: 0 0 1.013vw;
@@ -297,7 +349,32 @@ select {
           }
         }
 
-        & > div.button-container {
+        & > div.buttons {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          flex-direction: row;
+
+          & > div.button-container {
+            width: 50%;
+
+            & > p {
+              position: absolute;
+              left: 40%;
+              font-size: 1.426vw;
+            }
+          }
+
+          & > div.button-container.finishModule {
+            justify-content: flex-start;
+
+            & > button {
+              width: 80%;
+            }
+          }
+        }
+
+        & div.button-container {
           width: 100%;
           height: 3.775vw;
           margin-top: 2.5%;
@@ -305,6 +382,32 @@ select {
           justify-content: flex-start;
           align-items: center;
           position: relative;
+
+          &.parentYes {
+            width: 25%;
+            height: 5vw;
+            justify-content: center;
+            margin-top: 0;
+
+            > button {
+              width: 50%;
+            }
+          }
+
+          &.parentYes.continue{
+            width: 35%;
+          }
+
+          &.parentNo {
+            width: 25%;
+            height: 5vw;
+            justify-content: center;
+            margin-top: 0;
+
+            & > button {
+              width: 50%;
+            }
+          }
 
           & > button {
             cursor: pointer;
@@ -374,7 +477,6 @@ select {
       background-color: rgba(0, 0, 0, 0.1);
 
       & > div.chunk {
-        width: 25%;
         height: 100%;
         background: none;
         transition: all 200ms;
@@ -475,6 +577,44 @@ select {
 }
 
 .hero-fade-exit-done {
+  position: absolute;
+  opacity: 0;
+  top: -100%;
+}
+
+//MODULE
+
+.module-fade-appear {
+  opacity: 0;
+}
+.module-fade-appear-active {
+  opacity: 1;
+  transition: opacity 400ms;
+}
+
+.module-fade-enter {
+  opacity: 0;
+}
+
+.module-fade-enter-active {
+  opacity: 1;
+  transition: opacity 400ms;
+}
+
+.module-fade-exit {
+  opacity: 1;
+  position: absolute;
+  top: 0;
+}
+
+.module-fade-exit-active {
+  opacity: 0;
+  position: absolute;
+  top: -100%;
+  transition: all 400ms;
+}
+
+.module-fade-exit-done {
   position: absolute;
   opacity: 0;
   top: -100%;

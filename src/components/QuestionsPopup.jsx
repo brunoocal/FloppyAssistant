@@ -1,12 +1,19 @@
 import React from "react";
 import Up from "../static/images/up.png";
 import Down from "../static/images/down.png";
+import { v4 as uuid } from "uuid";
 
 const QuestionsPopup = ({ upIndex, downIndex, index, questions }) => {
+  const styles = {
+    width: `calc(100% / ${questions.length})`,
+  };
+
   return (
     <div className="QuestionsPopup">
       <div className="awnsers">
-        <p>{index} de {questions.length} respondidas</p>
+        <p>
+          {index} de {questions.length} respondidas
+        </p>
         <div className="line">
           {questions.map((chunk) => {
             let className = "";
@@ -16,7 +23,11 @@ const QuestionsPopup = ({ upIndex, downIndex, index, questions }) => {
             }
 
             return (
-              <div key={chunk.question} className={`chunk ${className}`}></div>
+              <div
+                key={uuid()}
+                style={styles}
+                className={`chunk ${className}`}
+              ></div>
             );
           })}
         </div>
