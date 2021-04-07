@@ -255,11 +255,33 @@ select {
           width: 70%;
           height: 100%;
           padding: 0 5% 0 20%;
+          margin-bottom: 3.5%;
           & > h1 {
             font-size: 2.2vw;
             font-weight: 400;
             margin: 2% 0;
           }
+
+          & > .button-continue {
+            margin: 2.5% 0;
+            & > button {
+              cursor: pointer;
+              font-weight: 700;
+              outline: 0;
+              border: 1px solid transparent;
+              background-color: rgb(160, 4, 30);
+              box-shadow: rgb(0 0 0 / 10%) 0px 0.407vw 1.626vw 0px;
+              height: 80%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              color: white;
+              border-radius: 0.342vw;
+              padding: 1.084vw 1.7vw;
+              font-size: 2vw;
+            }
+          }
+
           & > input {
             width: 90%;
             padding: 0 0 1.013vw;

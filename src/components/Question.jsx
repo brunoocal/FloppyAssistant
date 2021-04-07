@@ -114,7 +114,24 @@ const Question = React.forwardRef((props, ref) => {
         return question;
       });
 
+      if (event.nextModule) {
+        console.log("------------------------------------");
+        console.log({ ...moduleData, questions: newQuestionsData });
+        console.log("------------------------------------");
+        console.log("------------------------------------");
+        console.log(newQuestionsData);
+        console.log("------------------------------------");
+      }
+
+      console.log("+++++++++++++++++++++++");
+      console.log(newQuestionsData);
+      console.log("+++++++++++++++++++++++");
+
       setStates.setData({ ...moduleData, questions: newQuestionsData });
+      window.localStorage.setItem(
+        "testModule",
+        JSON.stringify({ ...moduleData, questions: newQuestionsData })
+      );
       event.nextModule
         ? events.nextModule()
         : event.jumpQuestion

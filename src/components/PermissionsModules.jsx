@@ -1,34 +1,37 @@
 import React, { useEffect, useRef, useState } from "react";
 import Right from "../static/images/right.svg";
 import PermissionModule from "@components/PermissionModule";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
 
-import { v4 as uuid } from "uuid";
-
-const PermissionsModules = () => {
+const PermissionsModules = ({ events }) => {
   const [modules, setModules] = useState([
     {
       title: "Moderación",
       commands: [
-        { title: "Avisar", response: "" },
-        { title: "TempMute", response: "" },
-        { title: "Mute", response: "" },
-        { title: "Kick", response: "" },
-        { title: "TempBan", response: "" },
-        { title: "Ban", response: "" },
+        { title: "Avisar", path: "aviso", response: "" },
+        { title: "TempMute", path: "tempmute", response: "" },
+        { title: "Mute", path: "mute", response: "" },
+        { title: "Kick", path: "kick", response: "" },
+        { title: "TempBan", path: "tempban", response: "" },
+        { title: "Ban", path: "ban", response: "" },
       ],
     },
     {
       title: "Utilidades",
       commands: [
-        { title: "Avisar", response: "" },
-        { title: "TempMute", response: "" },
-        { title: "Mute", response: "" },
+        { title: "Config", path: "config", response: "" },
+        { title: "Massrole", path: "massrole", response: "" },
+        { title: "Serverinfo", path: "serverinfo", response: "" },
+        { title: "Sugerencia", path: "sugerencia", response: "" },
+        { title: "Userinfo", path: "userinfo", response: "" },
       ],
     },
-    { title: "General", commands: [{ title: "generalizao", response: "" }] },
-    { title: "Música", commands: [{ title: "play", response: "" }] },
-    { title: "Auto Moderación", commands: [{ title: "putazo", response: "" }] },
+    {
+      title: "Música",
+      commands: [
+        { title: "Play", path: "play", response: "" },
+        { title: "Skip", path: "skip", response: "" },
+      ],
+    },
   ]);
 
   const [activeModule, setActiveModule] = useState({});
@@ -71,6 +74,24 @@ const PermissionsModules = () => {
 
   const handleChangeModule = (index) => {
     setActiveModule(modules[index]);
+  };
+
+  const makePermissionsConfig = () => {
+    let allCommands = [];
+    modules.map((module) => {
+      module.commands.map((command) => {
+        allCommands = [...allCommands, command];
+      });
+    });
+
+    return allCommands;
+  };
+
+  const handleFinish = () => {
+    console.log("finish");
+    const config = makePermissionsConfig();
+    events.changeData(config);
+    events.finish();
   };
 
   const handleChangeCommand = (index) => {
@@ -144,7 +165,7 @@ const PermissionsModules = () => {
               <div className="dropdownContainer">
                 <div className="dropdown">
                   <div className="title">
-                    <h1>Categoria</h1>
+                    <h1>Comandos</h1>
                   </div>
                   <div className="content">
                     {modules.map((module, i) => {
@@ -188,26 +209,13 @@ const PermissionsModules = () => {
 
                     handleClass(e);
                   }}
-                  // onKeyDown={(e) => {
-                  //   if (e.target.value !== "") {
-                  //     if (
-                  //       getStates.data.questions.find(
-                  //         (question) =>
-                  //           question.question === questionData.question
-                  //       ).question ===
-                  //       getStates.data.questions[
-                  //         getStates.data.questions.length - 1
-                  //       ].question
-                  //     ) {
-                  //       handleKeyDown({ ...e, nextModule: true });
-                  //     } else {
-                  //       handleKeyDown(e);
-                  //     }
-                  //   }
-                  // }}
                   value={activeCommand.response}
                   type="text"
                 />
+
+                <div className="button-continue">
+                  <button onClick={handleFinish}>Finalizar</button>
+                </div>
               </div>
             </div>
           </div>

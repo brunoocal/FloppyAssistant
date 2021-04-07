@@ -70,7 +70,9 @@ const Module = React.memo(({ data, events }) => {
     console.log("DATA:", moduleData.questions);
     setActiveQuestion("");
     console.log("senddata");
+
     events.sendData(moduleData);
+
     events.upIndex();
   };
 
