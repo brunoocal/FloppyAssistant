@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const Finish = React.memo(({ permissionsData, questionsData }) => {
+  const [config, setConfig] = useState({});
+  const [loading, setLoading] = useState(true);
   console.log(permissionsData, questionsData);
 
   const createConfig = () => {
@@ -109,8 +111,6 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
             ...objectToInsert,
             [question.configPath]: question.response,
           };
-
-
         } else if (question.configPath.split(".").length > 1) {
           const pathArray = question.configPath.split(".");
           console.log(pathArray);
@@ -146,27 +146,61 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
       };
     });
 
-    // permissionsData.map((permission) => {
-    //   let objectToInsert = {
-    //     [permission.path]: {
-    //       permiso: permission.response,
-    //     },
-    //   };
-    //   initialConfig = {
-    //     ...initialConfig,
-    //     comandos: {
-    //       ...initialConfig.comandos,
-    //       ...objectToInsert,
-    //     },
-    //   };
-    // });
+    if (Boolean(localStorage.getItem("musica"))) {
+      let objectToInsert = JSON.parse(localStorage.getItem("musica"));
+
+      initialConfig = {
+        ...initialConfig,
+        musica: objectToInsert,
+      };
+    }
+
+    permissionsData.map((permission) => {
+      let objectToInsert = {
+        [permission.path]: {
+          permiso: permission.response,
+        },
+      };
+      initialConfig = {
+        ...initialConfig,
+        comandos: {
+          ...initialConfig.comandos,
+          ...objectToInsert,
+        },
+      };
+    });
 
     console.log(initialConfig);
+
+    sendData(initialConfig);
+  };
+
+  const sendData = (data) => {
+    fetch("https://api.floppy.red/config/create", {
+      method: "post",
+      mode: "cors",
+      headers: {
+        Accept: "*/*",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        setConfig(res);
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
     createConfig();
   }, []);
+
+  const copyText = () => {
+    navigator.clipboard.writeText(config.command);
+  };
 
   return (
     <div className="hero" tabIndex="0">
@@ -177,11 +211,19 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
         />
         <h1>Asistente de configuración para Floppy</h1>
         <h2>
-          Utiliza el siguiente comando en tu servidor luego de añadir a
+          Utiliza el siguiente comando en tu servidor luego de añadir a 
           <a href="https://www.floppy.red">Floppy</a> para cargar la
-          configuración que haz configurado en esta página
+          configuración que haz configurado en esta página.
+
+          Click en el comando para copiarlo.
         </h2>
-        <p>!config XD</p>
+        <p
+          onClick={() => {
+            copyText();
+          }}
+        >
+          {loading ? "Cargando..." : config.command}
+        </p>
         <div className="button-container">
           <button onClick={() => (window.location = window.location)}>
             Re-enviar

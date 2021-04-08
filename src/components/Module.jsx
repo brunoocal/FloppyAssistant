@@ -57,15 +57,6 @@ const Module = React.memo(({ data, events }) => {
     setActiveQuestion(moduleData.questions[index]);
   };
 
-  const handleSetParentQuestionResponse = (value) => {
-    if (value) {
-      setActiveQuestion(moduleData.questions[index]);
-      setModuleData({ ...moduleData, parentQuestionResponse: value });
-    } else {
-      handleNextModule();
-    }
-  };
-
   const handleNextModule = () => {
     console.log("DATA:", moduleData.questions);
     setActiveQuestion("");
@@ -122,18 +113,55 @@ const Module = React.memo(({ data, events }) => {
   //            CLOSE EVENT HANDLERS
   //-----------------------------------------
 
+  //NEW METHODS
+  //NEW METHODS
+  //NEW METHODS
+  //NEW METHODS
+  //NEW METHODS
+  //NEW METHODS
+  //NEW METHODS
+  //NEW METHODS
+  //NEW METHODS
+
+  const handleSetParentQuestionResponse = (value) => {
+    if (value) {
+      localStorage.setItem(
+        moduleData.path,
+        JSON.stringify({ ...moduleData, parentQuestionResponse: value })
+      );
+      setActiveQuestion(moduleData.questions[index]);
+      setModuleData(JSON.parse(localStorage.getItem(moduleData.path)));
+    } else {
+      handleNextModule();
+    }
+  };
+
+  const handleSetDataInModuleFromQuestion = (dataFromResponedQuestion) => {
+    localStorage.setItem(
+      moduleData.path,
+      JSON.stringify(dataFromResponedQuestion)
+    );
+
+    console.log(localStorage);
+    setModuleData(JSON.parse(localStorage.getItem(moduleData.path)));
+  };
+
+  const handleNextModuleAndLS = () => {
+    console.log("DATA:", moduleData.questions);
+    console.log(JSON.parse(localStorage.getItem(moduleData.path)));
+    setActiveQuestion("");
+
+    events.upIndex();
+  };
+
   //-----------------------------------------
   //               USE EFFECTS
   //-----------------------------------------
 
   useEffect(() => {
-    if (moduleData.parentQuestionResponse) {
-      setActiveQuestion(moduleData.questions[index]);
-    }
-
     if (
       moduleData.questions
-        .map(function (quest) {
+        .map(function (quest, i) {
           if (quest.response === "" || quest.response.length < 1) {
             return quest;
           }
@@ -141,11 +169,36 @@ const Module = React.memo(({ data, events }) => {
         .filter(Boolean).length <= 0
     ) {
       console.log("todas respondidas");
-      events.sendData(moduleData);
+      events.setDataOnMain(moduleData);
+    } else {
+      const notRespondedQuestions = moduleData.questions
+        .map(function (quest, i) {
+          if (quest.response === "" || quest.response.length < 1) {
+            return quest;
+          }
+        })
+        .filter(Boolean);
+
+      const tagsStrippedArray = notRespondedQuestions
+        .map((question) => {
+          if (Boolean(question.tag)) {
+            return;
+          }
+          return question;
+        })
+        .filter(Boolean);
+      console.log("tagsStrippedArray", tagsStrippedArray);
+      if (tagsStrippedArray.length <= 0) {
+        events.setDataOnMain(moduleData);
+      }
     }
   }, [moduleData]);
 
   useEffect(() => {
+    if (Boolean(moduleData.path)) {
+      localStorage.setItem(moduleData.path, JSON.stringify(moduleData));
+    }
+
     setActiveQuestion(moduleData.parentQuestion);
   }, []);
 
@@ -183,10 +236,13 @@ const Module = React.memo(({ data, events }) => {
                     upIndex: handleUpIndex,
                     downIndex: handleDownIndex,
                     handleParentResponse: handleSetParentQuestionResponse,
-                    nextModule: handleNextModule,
+                    nextModule: handleNextModuleAndLS,
                     upIndexSkipTag: handleJumpTag,
                   }}
-                  setStates={{ setData: setModuleData }}
+                  setStates={{
+                    setData: setModuleData,
+                    setDataInLS: handleSetDataInModuleFromQuestion,
+                  }}
                   getStates={{ data: moduleData }}
                   parentRef={ModuleRef}
                   responded={

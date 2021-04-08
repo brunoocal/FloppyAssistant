@@ -95,7 +95,7 @@ const Question = React.forwardRef((props, ref) => {
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      const moduleData = getStates.data;
+      const moduleData = getStates.data; //TESTING
       const newQuestionsData = moduleData.questions.map((question) => {
         if (question.question === questionData.question) {
           if (event.jumpQuestion) {
@@ -114,24 +114,8 @@ const Question = React.forwardRef((props, ref) => {
         return question;
       });
 
-      if (event.nextModule) {
-        console.log("------------------------------------");
-        console.log({ ...moduleData, questions: newQuestionsData });
-        console.log("------------------------------------");
-        console.log("------------------------------------");
-        console.log(newQuestionsData);
-        console.log("------------------------------------");
-      }
+      setStates.setDataInLS({ ...moduleData, questions: newQuestionsData });
 
-      console.log("+++++++++++++++++++++++");
-      console.log(newQuestionsData);
-      console.log("+++++++++++++++++++++++");
-
-      setStates.setData({ ...moduleData, questions: newQuestionsData });
-      window.localStorage.setItem(
-        "testModule",
-        JSON.stringify({ ...moduleData, questions: newQuestionsData })
-      );
       event.nextModule
         ? events.nextModule()
         : event.jumpQuestion
@@ -232,8 +216,9 @@ const Question = React.forwardRef((props, ref) => {
               <input
                 className={inputFocusClassName}
                 placeholder={"Escribe aquí tu respuesta..."}
-                onChange={async (e) => {
-                  await setData({
+                onChange={(e) => {
+                  //PERFECTO PORQUE LA DATA ES ACTUALIZADA, LO QUE NO SE ACTUALIZA SON LOS PADRES
+                  setData({
                     ...questionData,
                     response: e.target.value,
                   });
@@ -243,6 +228,7 @@ const Question = React.forwardRef((props, ref) => {
                 onKeyDown={(e) => {
                   if (e.target.value !== "") {
                     if (
+                      //ACTUALIZAR LOGICA ULTIMA PREGUNTA
                       getStates.data.questions.find(
                         (question) =>
                           question.question === questionData.question

@@ -321,7 +321,7 @@ const Main = () => {
     setfinishActive(true);
   };
 
-  const changePermissionData = (value) => setPermissionData(value);
+  const changePermissionData = (value) => setPermissionData(value); //Changeable
 
   const handleFinishModulesPassToPermissions = () => {
     setModulesActive(false);
@@ -333,7 +333,24 @@ const Main = () => {
     setModulesActive(true);
   };
 
+  const getAndSetDataFromLocalStorageToModules = (moduleData) => {
+    const moduleDataFromLS = JSON.parse(localStorage.getItem(moduleData.path));
+
+    const newModuleList = moduleList.map((module) => {
+      if (module.parentQuestion === moduleDataFromLS.parentQuestion) {
+        return moduleDataFromLS;
+      }
+      return module;
+    });
+
+    setModules(newModuleList);
+    localStorage.setItem("modules", JSON.stringify(newModuleList));
+  };
+
+  //WORKING ARRIBA
+
   const handleSetDataFromModule = (moduleData) => {
+    //SEND DATA METHOD
     console.log("XD");
     console.log(moduleData);
     const newModuleList = moduleList.map((module) => {
@@ -374,6 +391,10 @@ const Main = () => {
   //-----------------------------------------
 
   useEffect(() => {
+    localStorage.clear();
+    console.log("ACTUALIZADO", localStorage);
+    localStorage.setItem("modules", JSON.stringify(moduleList));
+
     setActiveModule(moduleList[0]);
   }, []);
 
@@ -411,6 +432,7 @@ const Main = () => {
                 upIndex: handleUpIndex,
                 downIndex: handleDownIndex,
                 sendData: handleSetDataFromModule,
+                setDataOnMain: getAndSetDataFromLocalStorageToModules,
               }}
             />
           </CSSTransition>

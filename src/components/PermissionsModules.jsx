@@ -205,9 +205,13 @@ const PermissionsModules = ({ events }) => {
                   ref={InputRef}
                   placeholder={"Escribe aquí tu respuesta..."}
                   onChange={async (e) => {
-                    await handleSetData(e);
-
-                    handleClass(e);
+                    console.log(parseInt(e.target.value));
+                    console.log(e.nativeEvent);
+                    console.log(e);
+                    if (Boolean(parseInt(e.nativeEvent.data))) {
+                      await handleSetData(e);
+                      handleClass(e);
+                    }
                   }}
                   value={activeCommand.response}
                   type="text"
