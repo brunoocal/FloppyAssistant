@@ -1,18 +1,17 @@
 import React from "react";
+import banner from "../static/images/banner.png";
 
 const Hero = React.forwardRef((props, ref) => {
   const onClick = props.onClick;
   return (
     <div className="hero" ref={ref} tabIndex="0">
       <div className="container">
-        <img
-          src="https://images.typeform.com/images/r8whbVmTbbEq/image/default"
-          alt=""
-        />
-        <h1>Floppy | Programa Beta Tester</h1>
+        <img src={banner} alt="" />
+        <h1>Asistente de configuración para Floppy</h1>
         <h2>
-          Bienvenido al Formulario para ser Beta Tester de Floppy y poder
-          disfrutar las nuevas novedades antes que nadie.
+          Bienvenido al asistente de configuración de Floppy, aquí podrás
+          configurar mediante preguntas los módulos de floppy, además de sus
+          permisos.
         </h2>
         <div className="button-container">
           <button onClick={onClick}>Comenzar</button>

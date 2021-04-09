@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { CSSTransition } from "react-transition-group";
+import banner from "../static/images/banner.png";
 
 const Finish = React.memo(({ permissionsData, questionsData }) => {
   const [config, setConfig] = useState({});
   const [loading, setLoading] = useState(true);
+  const [copied, setCopied] = useState(false);
   console.log(permissionsData, questionsData);
 
   const createConfig = () => {
@@ -200,22 +203,19 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
 
   const copyText = () => {
     navigator.clipboard.writeText(config.command);
+    setCopied(true);
   };
 
   return (
     <div className="hero" tabIndex="0">
       <div className="container">
-        <img
-          src="https://images.typeform.com/images/r8whbVmTbbEq/image/default"
-          alt=""
-        />
+        <img src={banner} alt="" />
         <h1>Asistente de configuración para Floppy</h1>
         <h2>
-          Utiliza el siguiente comando en tu servidor luego de añadir a 
+          Utiliza el siguiente comando en tu servidor luego de añadir a{" "}
           <a href="https://www.floppy.red">Floppy</a> para cargar la
-          configuración que haz configurado en esta página.
-
-          Click en el comando para copiarlo.
+          configuración que haz configurado en esta página. Click en el comando
+          para copiarlo.
         </h2>
         <p
           onClick={() => {
@@ -224,7 +224,17 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
         >
           {loading ? "Cargando..." : config.command}
         </p>
-        <div className="button-container">
+        {copied && (
+          <CSSTransition
+            in={copied}
+            appear={true}
+            timeout={400}
+            classNames={"finish-copy"}
+          >
+            <h2>¡Copiado al portapapeles!</h2>
+          </CSSTransition>
+        )}
+        <div className="button-container finish">
           <button onClick={() => (window.location = window.location)}>
             Re-enviar
           </button>
