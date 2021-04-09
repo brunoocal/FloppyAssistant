@@ -4,7 +4,7 @@ import { v4 as uuid } from "uuid";
 import Question from "@components/Question";
 import QuestionsPopup from "@components/QuestionsPopup";
 
-const Module = React.memo(({ data, events }) => {
+const Module = React.memo(({ data, parentindex, events }) => {
   const [moduleData, setModuleData] = useState(data);
   const [activeQuestion, setActiveQuestion] = useState("");
   const ModuleRef = useRef(null);
@@ -222,6 +222,7 @@ const Module = React.memo(({ data, events }) => {
                   isParentQuestion
                   required={moduleData.required}
                   data={activeQuestion}
+                  moduleindex={parentindex}
                   events={{
                     upIndex: handleUpIndex,
                     downIndex: handleDownIndex,

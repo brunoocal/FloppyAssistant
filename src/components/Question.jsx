@@ -9,6 +9,7 @@ const Question = React.forwardRef((props, ref) => {
     data,
     required,
     index,
+    moduleindex,
     responded,
     events,
     setStates,
@@ -143,7 +144,7 @@ const Question = React.forwardRef((props, ref) => {
           <div className="question-content">
             <div className="question-headers parentQuestion">
               <div className="question-index parentQuestion">
-                <p>{1}</p>
+                <p>{moduleindex + 1}</p>
                 <img src={Right} alt="Right Arrow" />
               </div>
 
@@ -274,12 +275,20 @@ const Question = React.forwardRef((props, ref) => {
                 >
                   <div className="button-container">
                     <button
-                      onClick={() =>
-                        handleKeyDown({
-                          key: "Enter",
-                          target: { value: "false" },
-                        })
-                      }
+                      onClick={() => {
+                        if (Boolean(questionData.tag)) {
+                          handleKeyDown({
+                            key: "Enter",
+                            target: { value: "false" },
+                            jumpQuestion: true,
+                          });
+                        } else {
+                          handleKeyDown({
+                            key: "Enter",
+                            target: { value: "false" },
+                          });
+                        }
+                      }}
                     >
                       No
                     </button>
@@ -350,6 +359,7 @@ const Question = React.forwardRef((props, ref) => {
                     </CSSTransition>
                   )}
                 {Boolean(questionData.tag) &&
+                  !Boolean(questionData.buttons) &&
                   getStates.data.questions.find(
                     (question) => question.tag === questionData.tag
                   ).question === questionData.question && (

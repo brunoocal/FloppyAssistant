@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Right from "../static/images/right.svg";
 import PermissionModule from "@components/PermissionModule";
 
-const PermissionsModules = ({ events }) => {
+const PermissionsModules = ({ events, parentindex }) => {
   const [modules, setModules] = useState([
     {
       title: "Moderación",
@@ -151,7 +151,7 @@ const PermissionsModules = ({ events }) => {
             <div className="question-content permissionQuestion">
               <div className="question-headers parentQuestion permissionQuestion">
                 <div className="question-index parentQuestion permissionQuestion">
-                  <p>{1}</p>
+                  <p>{parentindex + 2}</p>
                   <img src={Right} alt="Right Arrow" />
                 </div>
 
@@ -164,9 +164,6 @@ const PermissionsModules = ({ events }) => {
             <div className="content">
               <div className="dropdownContainer">
                 <div className="dropdown">
-                  <div className="title">
-                    <h1>Comandos</h1>
-                  </div>
                   <div className="content">
                     {modules.map((module, i) => {
                       const style = {
@@ -208,7 +205,11 @@ const PermissionsModules = ({ events }) => {
                     console.log(parseInt(e.target.value));
                     console.log(e.nativeEvent);
                     console.log(e);
-                    if (Boolean(parseInt(e.nativeEvent.data))) {
+                    if (
+                      Boolean(parseInt(e.nativeEvent.data)) ||
+                      e.nativeEvent.inputType === "deleteContentBackward" ||
+                      parseInt(e.nativeEvent.data) === 0
+                    ) {
                       await handleSetData(e);
                       handleClass(e);
                     }

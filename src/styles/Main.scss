@@ -348,9 +348,9 @@ select {
               transform: scale(0);
               animation: scale-in-ver-top 0.5s
                 cubic-bezier(0.25, 0.46, 0.45, 0.94) 500ms forwards;
-              border-bottom-left-radius: 0.5vw;
-              border-bottom-right-radius: 0.5vw;
               transition: height 500ms;
+              padding: 5%;
+              border-radius: 0.5vw;
 
               & > .item {
                 width: 100%;

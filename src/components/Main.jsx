@@ -428,6 +428,7 @@ const Main = () => {
           >
             <Module
               data={activeModule}
+              parentindex={moduleIndex}
               events={{
                 upIndex: handleUpIndex,
                 downIndex: handleDownIndex,
@@ -447,6 +448,7 @@ const Main = () => {
           classNames="permissions-fade"
         >
           <PermissionsModules
+            parentindex={moduleIndex}
             events={{
               finish: handleFinishButton,
               changeData: changePermissionData,
