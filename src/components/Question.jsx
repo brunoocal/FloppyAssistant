@@ -81,7 +81,6 @@ const Question = React.forwardRef((props, ref) => {
               otherQuestion.className.includes("question-fade-exit-done") ||
               otherQuestion.className.includes("question-two-fade-exit-done")
             ) {
-              console.log("question-fade-exit-done");
               if (
                 !otherQuestion.className.includes("question-fade-exit-done")
               ) {
@@ -159,7 +158,6 @@ const Question = React.forwardRef((props, ref) => {
             </div>
             <div className="question-input parentQuestion">
               <TransitionGroup component={null}>
-                {console.log(data.required)}
                 {!required ? (
                   <>
                     <CSSTransition

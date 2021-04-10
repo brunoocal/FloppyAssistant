@@ -25,16 +25,12 @@ const Module = React.memo(({ data, parentindex, events }) => {
   moduleData.questions.forEach((quest) => {
     if (Boolean(quest.skipped)) {
       moduleTagFromForEach = quest.tag;
-      console.log(moduleTagFromForEach);
     }
-    if (quest.tag === moduleTagFromForEach) {
-      respondedQuestions += 1;
-    }
-    if (Boolean(quest.void)) {
-      respondedQuestions += 1;
-    }
-
-    if (quest.response) {
+    if (
+      quest.tag === moduleTagFromForEach ||
+      Boolean(quest.void) ||
+      quest.reponse
+    ) {
       respondedQuestions += 1;
     }
   });
@@ -49,7 +45,7 @@ const Module = React.memo(({ data, parentindex, events }) => {
 
   const handleUpIndex = () => {
     index + 1 >= moduleData.questions.length ? (index = 0) : (index += 1);
-    console.log(index);
+
     setQuestionAnimationClass("question-fade");
     setActiveQuestion(moduleData.questions[index]);
   };
@@ -61,9 +57,7 @@ const Module = React.memo(({ data, parentindex, events }) => {
   };
 
   const handleNextModule = () => {
-    console.log("DATA:", moduleData.questions);
     setActiveQuestion("");
-    console.log("senddata");
 
     events.sendData(moduleData);
 
@@ -72,12 +66,10 @@ const Module = React.memo(({ data, parentindex, events }) => {
 
   const handleJumpTag = () => {
     const tag = activeQuestion.tag;
-    console.log(tag);
     let newIndex;
     moduleData.questions.forEach((question) => {
       if (question.tag === tag) {
         if (question.question !== activeQuestion.question) {
-          console.log(question.question);
           newIndex = moduleData.questions.indexOf(question) + 1;
         }
       }
@@ -87,7 +79,6 @@ const Module = React.memo(({ data, parentindex, events }) => {
   };
 
   const handleJumpDownTag = () => {
-    console.log(activeQuestion);
     const activeQuestionIndex = moduleData.questions.indexOf(
       moduleData.questions.find(
         (question) => question.question === activeQuestion.question
@@ -145,13 +136,10 @@ const Module = React.memo(({ data, parentindex, events }) => {
       JSON.stringify(dataFromResponedQuestion)
     );
 
-    console.log(localStorage);
     setModuleData(JSON.parse(localStorage.getItem(moduleData.path)));
   };
 
   const handleNextModuleAndLS = () => {
-    console.log("DATA:", moduleData.questions);
-    console.log(JSON.parse(localStorage.getItem(moduleData.path)));
     setActiveQuestion("");
 
     events.upIndex();
@@ -171,7 +159,6 @@ const Module = React.memo(({ data, parentindex, events }) => {
         })
         .filter(Boolean).length <= 0
     ) {
-      console.log("todas respondidas");
       events.setDataOnMain(moduleData);
     } else {
       const notRespondedQuestions = moduleData.questions
@@ -190,7 +177,6 @@ const Module = React.memo(({ data, parentindex, events }) => {
           return question;
         })
         .filter(Boolean);
-      console.log("tagsStrippedArray", tagsStrippedArray);
       if (tagsStrippedArray.length <= 0) {
         events.setDataOnMain(moduleData);
       }

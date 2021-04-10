@@ -352,8 +352,6 @@ const Main = () => {
 
   const handleSetDataFromModule = (moduleData) => {
     //SEND DATA METHOD
-    console.log("XD");
-    console.log(moduleData);
     const newModuleList = moduleList.map((module) => {
       if (module.parentQuestion === moduleData.parentQuestion) {
         return moduleData;
@@ -368,7 +366,6 @@ const Main = () => {
     moduleIndex + 1 >= moduleList.length
       ? handleFinishModulesPassToPermissions()
       : (moduleIndex += 1);
-    console.log(moduleIndex);
     setActiveModule(moduleList[moduleIndex]);
   };
 
@@ -393,7 +390,6 @@ const Main = () => {
 
   useEffect(() => {
     localStorage.clear();
-    console.log("ACTUALIZADO", localStorage);
     localStorage.setItem("modules", JSON.stringify(moduleList));
 
     setActiveModule(moduleList[0]);

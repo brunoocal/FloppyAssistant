@@ -88,7 +88,6 @@ const PermissionsModules = ({ events, parentindex }) => {
   };
 
   const handleFinish = () => {
-    console.log("finish");
     const config = makePermissionsConfig();
     events.changeData(config);
     events.finish();
@@ -202,9 +201,6 @@ const PermissionsModules = ({ events, parentindex }) => {
                   ref={InputRef}
                   placeholder={"Escribe aquí tu respuesta..."}
                   onChange={async (e) => {
-                    console.log(parseInt(e.target.value));
-                    console.log(e.nativeEvent);
-                    console.log(e);
                     if (
                       Boolean(parseInt(e.nativeEvent.data)) ||
                       e.nativeEvent.inputType === "deleteContentBackward" ||

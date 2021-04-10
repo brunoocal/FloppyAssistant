@@ -6,7 +6,6 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
   const [config, setConfig] = useState({});
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
-  console.log(permissionsData, questionsData);
 
   const createConfig = () => {
     let initialConfig = {
@@ -116,7 +115,6 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
           };
         } else if (question.configPath.split(".").length > 1) {
           const pathArray = question.configPath.split(".");
-          console.log(pathArray);
 
           let spreadPathArray0 = {};
           if (Boolean(objectToInsert[pathArray[0]])) {
@@ -173,7 +171,6 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
       };
     });
 
-    console.log(initialConfig);
 
     sendData(initialConfig);
   };
@@ -191,7 +188,6 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         setConfig(res);
         setLoading(false);
       });

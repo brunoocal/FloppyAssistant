@@ -65,7 +65,6 @@ const PermissionModule = ({
           <>
             <CSSTransition
               in={activated}
-              onExit={() => console.log("exit")}
               classNames={"subitem-anim"}
               timeout={
                 activated ? 200 * (index + 1) : 200 * (lastIndex - (index - 1))
