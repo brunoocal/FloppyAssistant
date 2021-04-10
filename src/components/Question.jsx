@@ -96,7 +96,7 @@ const Question = React.forwardRef((props, ref) => {
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      const moduleData = getStates.data; //TESTING
+      const moduleData = getStates.data;
       const newQuestionsData = moduleData.questions.map((question) => {
         if (question.question === questionData.question) {
           if (event.jumpQuestion) {
@@ -104,6 +104,13 @@ const Question = React.forwardRef((props, ref) => {
               ...questionData,
               response: event.target.value,
               skipped: true,
+            };
+          }
+          if (event.void) {
+            return {
+              ...questionData,
+              response: event.target.value,
+              void: true,
             };
           }
           return {
@@ -383,6 +390,52 @@ const Question = React.forwardRef((props, ref) => {
                           }}
                         >
                           {questionData.skipped ? "Saltado" : "Saltar"}
+                          <img src={Check} alt="Check" />
+                        </button>
+                      </div>
+                    </CSSTransition>
+                  )}
+
+                {!Boolean(questionData.tag) &&
+                  !Boolean(questionData.buttons) &&
+                  !Boolean(questionData.required) && (
+                    <CSSTransition
+                      in={true}
+                      timeout={400}
+                      classNames="question-button-fade"
+                    >
+                      <div
+                        className={`button-container finishModule ${
+                          inputFocusClassName !== "" ? "jumpQuestion" : ""
+                        }`}
+                      >
+                        <button
+                          onClick={() => {
+                            if (
+                              getStates.data.questions.find(
+                                (question) =>
+                                  question.question === questionData.question
+                              ).question ===
+                              getStates.data.questions[
+                                getStates.data.questions.length - 1
+                              ].question
+                            ) {
+                              handleKeyDown({
+                                key: "Enter",
+                                target: { value: questionData.response },
+                                void: true,
+                                nextModule: true,
+                              });
+                            } else {
+                              handleKeyDown({
+                                key: "Enter",
+                                target: { value: questionData.response },
+                                void: true,
+                              });
+                            }
+                          }}
+                        >
+                          Saltar
                           <img src={Check} alt="Check" />
                         </button>
                       </div>

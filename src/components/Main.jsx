@@ -35,6 +35,7 @@ const Main = () => {
           example: "!",
           configPath: "prefijo",
           response: "",
+          required: true,
         },
       ],
     },

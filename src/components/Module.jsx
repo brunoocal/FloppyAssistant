@@ -30,6 +30,9 @@ const Module = React.memo(({ data, parentindex, events }) => {
     if (quest.tag === moduleTagFromForEach) {
       respondedQuestions += 1;
     }
+    if (Boolean(quest.void)) {
+      respondedQuestions += 1;
+    }
 
     if (quest.response) {
       respondedQuestions += 1;
