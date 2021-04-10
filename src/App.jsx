@@ -12,7 +12,7 @@ const App = () => {
             "Aquí encontraras el asistente de configuración para floppy, donde podrás configurar todos sus módulos y permisos de una forma muy sencilla a través de preguntas"
           }
         />
-        <meta name="image" content={Floppy} />
+        <meta name="image" content={"https://floppy.red/floppy.png"} />
         <meta name="robots" content="follow" />
         <link rel="icon" type="image/png" href={Floppy} sizes="16x16" />
         <meta property="og:locale" content="es_ES" />
@@ -26,7 +26,7 @@ const App = () => {
           property="og:description"
           content="En el asistente de configuración para Floppy podrás configurar todos sus módulos y permisos de una forma sencilla e intuitiva a través de preguntas."
         />
-        <meta property="og:image" content={Floppy} />
+        <meta property="og:image" content={"https://floppy.red/floppy.png"} />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@discordfloppy" />
@@ -39,7 +39,7 @@ const App = () => {
           name="twitter:description"
           content="En el asistente de configuración para Floppy podrás configurar todos sus módulos y permisos de una forma sencilla e intuitiva a través de preguntas."
         />
-        <meta name="twitter:image" content={Floppy} />
+        <meta name="twitter:image" content={"https://floppy.red/floppy.png"} />
       </Helmet>
       <Main></Main>
     </>
