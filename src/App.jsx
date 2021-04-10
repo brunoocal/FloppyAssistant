@@ -5,6 +5,7 @@ const App = () => {
   return (
     <>
       <Helmet>
+
         <title>Asistente - Floppy</title>
         <meta
           name="description"
@@ -26,7 +27,7 @@ const App = () => {
           property="og:description"
           content="En el asistente de configuración para Floppy podrás configurar todos sus módulos y permisos de una forma sencilla e intuitiva a través de preguntas."
         />
-        <meta property="og:image" content={"https://floppy.red/floppy.png"} />
+        <meta property="og:image" content="https://www.floppy.red/floppy.png" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@discordfloppy" />
@@ -39,7 +40,7 @@ const App = () => {
           name="twitter:description"
           content="En el asistente de configuración para Floppy podrás configurar todos sus módulos y permisos de una forma sencilla e intuitiva a través de preguntas."
         />
-        <meta name="twitter:image" content={"https://floppy.red/floppy.png"} />
+        <meta name="twitter:image" content="https://www.floppy.red/floppy.png" />
       </Helmet>
       <Main></Main>
     </>
