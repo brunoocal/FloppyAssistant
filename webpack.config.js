@@ -31,7 +31,10 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        use: { loader: "html-loader" },
+        loader: "html-loader",
+        options: {
+          minimize: false,
+        },
       },
       {
         test: /\.s[ac]ss$/,
@@ -50,6 +53,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./public/index.html",
       filename: "./index.html",
+      minify: {
+        removeComments: false,
+      },
     }),
     new MiniCssExtractPlugin({
       filename: "main[contenthash].css",
@@ -58,6 +64,15 @@ module.exports = {
   ],
   optimization: {
     minimize: true,
-    minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
+    minimizer: [
+      new CssMinimizerPlugin(),
+      new TerserPlugin({
+        terserOptions: {
+          output: {
+            comments: true,
+          },
+        },
+      }),
+    ],
   },
 };
