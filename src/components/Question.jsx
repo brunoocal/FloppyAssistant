@@ -105,6 +105,15 @@ const Question = React.forwardRef((props, ref) => {
               skipped: true,
             };
           }
+          if (event.nextModuleButWithoutQuestionsCheck) {
+            return {
+              ...questionData,
+              response: event.target.value,
+              skipped: false,
+              void: true,
+              sendWithoutCheckQuestions: true,
+            };
+          }
           if (event.void) {
             return {
               ...questionData,
@@ -112,6 +121,7 @@ const Question = React.forwardRef((props, ref) => {
               void: true,
             };
           }
+
           return {
             ...questionData,
             response: event.target.value,
@@ -355,6 +365,7 @@ const Question = React.forwardRef((props, ref) => {
                               key: "Enter",
                               target: { value: questionData.response },
                               nextModule: true,
+                              nextModuleButWithoutQuestionsCheck: true,
                             })
                           }
                         >
@@ -423,6 +434,7 @@ const Question = React.forwardRef((props, ref) => {
                                 target: { value: questionData.response },
                                 void: true,
                                 nextModule: true,
+                                nextModuleButWithoutQuestionsCheck: true,
                               });
                             } else {
                               handleKeyDown({

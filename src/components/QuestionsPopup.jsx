@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Up from "../static/images/up.png";
 import Down from "../static/images/down.png";
 import { v4 as uuid } from "uuid";
@@ -11,10 +11,34 @@ const QuestionsPopup = ({
   activeQuestion,
   handleJumpTag,
   handleJumpDownTag,
+  moduleRef,
 }) => {
   const styles = {
     width: `calc(100% / ${questions.length})`,
   };
+
+  let pointersClassName = "";
+
+  useEffect(() => {
+    if (Boolean(moduleRef.current)) {
+      const childArr = [...moduleRef.current.children];
+      const questionsOnChildArr = childArr
+        .filter((child) => {
+          if (
+            child.className.includes("question") &&
+            !child.className.includes("Popup")
+          ) {
+            return child;
+          }
+        })
+        .filter(Boolean);
+      if (questionsOnChildArr.length >= 2) {
+        pointersClassName = "noEvents";
+      } else {
+        pointersClassName = "";
+      }
+    }
+  });
 
   return (
     <div className="QuestionsPopup">
@@ -44,22 +68,28 @@ const QuestionsPopup = ({
         <h4>Preguntas</h4>
         <img
           src={Down}
-          onClick={() => (activeQuestion.skipped ? handleJumpTag() : upIndex())}
+          onClick={() => {
+            if (pointersClassName === "") {
+              activeQuestion.skipped ? handleJumpTag() : upIndex();
+            }
+          }}
           className="icon"
         ></img>
         <img
           src={Up}
           onClick={() => {
-            const activeQuestionIndex = questions.indexOf(
-              questions.find(
-                (question) => question.question === activeQuestion.question
-              )
-            );
-            const upQuestion = questions[activeQuestionIndex - 1];
-            if (Boolean(upQuestion)) {
-              Boolean(upQuestion.tag) ? handleJumpDownTag() : downIndex();
-            } else {
-              downIndex();
+            if (pointersClassName === "") {
+              const activeQuestionIndex = questions.indexOf(
+                questions.find(
+                  (question) => question.question === activeQuestion.question
+                )
+              );
+              const upQuestion = questions[activeQuestionIndex - 1];
+              if (Boolean(upQuestion)) {
+                Boolean(upQuestion.tag) ? handleJumpDownTag() : downIndex();
+              } else {
+                downIndex();
+              }
             }
           }}
           className="icon"

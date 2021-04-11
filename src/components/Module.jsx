@@ -29,7 +29,7 @@ const Module = React.memo(({ data, parentindex, events }) => {
     if (
       quest.tag === moduleTagFromForEach ||
       Boolean(quest.void) ||
-      quest.reponse
+      Boolean(quest.response)
     ) {
       respondedQuestions += 1;
     }
@@ -179,6 +179,16 @@ const Module = React.memo(({ data, parentindex, events }) => {
         .filter(Boolean);
       if (tagsStrippedArray.length <= 0) {
         events.setDataOnMain(moduleData);
+      } else {
+        if (
+          Boolean(
+            moduleData.questions[moduleData.questions.length - 1]
+              .sendWithoutCheckQuestions
+          )
+        ) {
+          console.log("sendWithoutCheckQuestions");
+          events.setDataOnMain(moduleData);
+        }
       }
     }
   }, [moduleData]);
@@ -235,11 +245,7 @@ const Module = React.memo(({ data, parentindex, events }) => {
                   }}
                   getStates={{ data: moduleData }}
                   parentRef={ModuleRef}
-                  responded={
-                    respondedQuestions >= moduleData.questions.length - 1
-                      ? true
-                      : false
-                  }
+                  responded={true}
                 />
               )}
             </CSSTransition>
@@ -258,6 +264,7 @@ const Module = React.memo(({ data, parentindex, events }) => {
                 questions={moduleData.questions}
                 activeQuestion={activeQuestion}
                 index={respondedQuestions}
+                moduleRef={ModuleRef}
               />
             </CSSTransition>
           )}
