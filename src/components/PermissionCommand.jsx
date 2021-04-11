@@ -31,7 +31,10 @@ const PermissionCommand = ({
       ) : (
         ""
       )}
-      <h1>{command.title}</h1>
+      <h1>
+        {command.title}{" "}
+        <span>{command.response >= 1 ? `(${command.response})` : ""}</span>
+      </h1>
     </div>
   );
 };

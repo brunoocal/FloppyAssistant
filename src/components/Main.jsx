@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 import "@styles/Main.scss";
+
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { v4 as uuid } from "uuid";
 import Hero from "@components/Hero";

@@ -5,7 +5,6 @@ import banner from "../static/images/banner.png";
 const Finish = React.memo(({ permissionsData, questionsData }) => {
   const [config, setConfig] = useState({});
   const [loading, setLoading] = useState(true);
-  const [copied, setCopied] = useState(false);
 
   const createConfig = () => {
     let initialConfig = {
@@ -130,13 +129,25 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
               },
             };
           } else {
-            objectToInsert = {
-              ...objectToInsert,
-              [pathArray[0]]: {
-                ...spreadPathArray0,
-                [pathArray[1]]: question.response,
-              },
-            };
+            if (pathArray[1] === "custom") {
+              const resArr = question.response.split(",");
+
+              objectToInsert = {
+                ...objectToInsert,
+                [pathArray[0]]: {
+                  ...spreadPathArray0,
+                  [pathArray[1]]: resArr,
+                },
+              };
+            } else {
+              objectToInsert = {
+                ...objectToInsert,
+                [pathArray[0]]: {
+                  ...spreadPathArray0,
+                  [pathArray[1]]: question.response,
+                },
+              };
+            }
           }
         }
       });
@@ -171,7 +182,6 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
       };
     });
 
-
     sendData(initialConfig);
   };
 
@@ -199,7 +209,15 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
 
   const copyText = () => {
     navigator.clipboard.writeText(config.command);
-    setCopied(true);
+    toast.info("¡Copiado al portapapeles!", {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   return (
@@ -220,16 +238,7 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
         >
           {loading ? "Cargando..." : config.command}
         </p>
-        {copied && (
-          <CSSTransition
-            in={copied}
-            appear={true}
-            timeout={400}
-            classNames={"finish-copy"}
-          >
-            <h2>¡Copiado al portapapeles!</h2>
-          </CSSTransition>
-        )}
+
         <div className="button-container finish">
           <button onClick={() => (window.location = window.location)}>
             Re-enviar

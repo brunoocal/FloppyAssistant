@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { toast } from "react-toastify";
 import Check from "../static/images/check.png";
 import Right from "../static/images/right.svg";
 
@@ -19,6 +20,7 @@ const Question = React.forwardRef((props, ref) => {
   const [questionData, setData] = useState(data);
   const [inputFocusClassName, setInputClassName] = useState("");
   const QuestionRef = useRef(null);
+  const InputRef = useRef(null);
 
   //-----------------------------------------
   //            EVENT HANDLERS
@@ -31,6 +33,12 @@ const Question = React.forwardRef((props, ref) => {
       setInputClassName("");
     }
   };
+
+  useEffect(() => {
+    if (Boolean(InputRef.current)) {
+      setTimeout(() => InputRef.current.focus(), 1100);
+    }
+  }, []);
 
   useEffect(() => {
     if (!isParentQuestion) {
@@ -221,7 +229,20 @@ const Question = React.forwardRef((props, ref) => {
 
             <h2>{data.question}</h2>
             {!questionData.buttons && (
-              <h3>
+              <h3
+                onClick={() => {
+                  toast.info("¡Copiado al portapapeles!", {
+                    position: "bottom-left",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                  });
+                  navigator.clipboard.writeText(data.example);
+                }}
+              >
                 <strong>Ejemplo: </strong>
                 {data.example}
               </h3>
@@ -232,8 +253,8 @@ const Question = React.forwardRef((props, ref) => {
               <input
                 className={inputFocusClassName}
                 placeholder={"Escribe aquí tu respuesta..."}
+                ref={InputRef}
                 onChange={(e) => {
-                  //PERFECTO PORQUE LA DATA ES ACTUALIZADA, LO QUE NO SE ACTUALIZA SON LOS PADRES
                   setData({
                     ...questionData,
                     response: e.target.value,
@@ -244,7 +265,6 @@ const Question = React.forwardRef((props, ref) => {
                 onKeyDown={(e) => {
                   if (e.target.value !== "") {
                     if (
-                      //ACTUALIZAR LOGICA ULTIMA PREGUNTA
                       getStates.data.questions.find(
                         (question) =>
                           question.question === questionData.question
