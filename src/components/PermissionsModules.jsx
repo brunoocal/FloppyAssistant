@@ -157,6 +157,10 @@ const PermissionsModules = ({ events, parentindex }) => {
                 <h2>Indica los permisos para los comandos de Floppy</h2>
               </div>
             </div>
+            <h1>
+              ¡Recuerda que cualquier comando que no configures su permiso
+              tendrá por defecto el valor de 100!
+            </h1>
           </div>
 
           <div className="permission-dropdown-container">
