@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { CSSTransition } from "react-transition-group";
 import banner from "../static/images/banner.png";
+import { toast } from "react-toastify";
 
 const Finish = React.memo(({ permissionsData, questionsData }) => {
   const [config, setConfig] = useState({});
@@ -181,6 +181,24 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
         },
       };
     });
+
+    const rolePermissionsData = JSON.parse(
+      localStorage.getItem("rolePermissions")
+    );
+
+
+    rolePermissionsData.map((rolePermission) => {
+      if (
+        Number.isInteger(parseInt(rolePermission.key)) &&
+        Number.isInteger(parseInt(rolePermission.value))
+      ) {
+        initialConfig.permisos = {
+          ...initialConfig.permisos,
+          [rolePermission.key]: parseInt(rolePermission.value),
+        };
+      }
+    });
+
 
     sendData(initialConfig);
   };

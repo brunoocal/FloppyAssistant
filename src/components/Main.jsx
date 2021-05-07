@@ -8,11 +8,13 @@ import Hero from "@components/Hero";
 import Finish from "@components/Finish";
 import Module from "@components/Module";
 import PermissionsModules from "@components/PermissionsModules";
+import RolePermissions from "@components/RolePermissions"
 
 const Main = () => {
   const [isHeroActive, setHeroActive] = useState(true);
   const [isModulesActive, setModulesActive] = useState(false);
   const [isPermissionsActive, setPermissions] = useState(false);
+  const [isRolePermissonsActive, setRolesActive] = useState(false);
   const [isFinishActive, setfinishActive] = useState(false);
   const [permissionData, setPermissionData] = useState([]);
 
@@ -319,8 +321,13 @@ const Main = () => {
   //-----------------------------------------
 
   const handleFinishButton = () => {
-    setPermissions(false);
+    setRolesActive(false);
     setfinishActive(true);
+  };
+
+  const handleRolesModuleButton = () => {
+    setPermissions(false);
+    setRolesActive(true);
   };
 
   const changePermissionData = (value) => setPermissionData(value); //Changeable
@@ -448,10 +455,21 @@ const Main = () => {
           <PermissionsModules
             parentindex={moduleIndex}
             events={{
-              finish: handleFinishButton,
+              finish: handleRolesModuleButton,
               changeData: changePermissionData,
             }}
           />
+        </CSSTransition>
+      )}
+
+      {isRolePermissonsActive && (
+        <CSSTransition
+          in={isRolePermissonsActive}
+          appear={true}
+          timeout={700}
+          classNames="permissions-fade"
+        >
+          <RolePermissions passToFinishModule={handleFinishButton}/>
         </CSSTransition>
       )}
 
