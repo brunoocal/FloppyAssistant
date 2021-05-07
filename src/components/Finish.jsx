@@ -163,7 +163,10 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
 
       initialConfig = {
         ...initialConfig,
-        musica: objectToInsert,
+        musica: {
+          activado: objectToInsert.parentQuestionRespons,
+          youtube_key: objectToInsert.questions[0].response,
+        },
       };
     }
 
@@ -186,7 +189,6 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
       localStorage.getItem("rolePermissions")
     );
 
-
     rolePermissionsData.map((rolePermission) => {
       if (
         Number.isInteger(parseInt(rolePermission.key)) &&
@@ -198,7 +200,6 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
         };
       }
     });
-
 
     sendData(initialConfig);
   };
