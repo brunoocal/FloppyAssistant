@@ -164,7 +164,7 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
       initialConfig = {
         ...initialConfig,
         musica: {
-          activado: objectToInsert.parentQuestionRespons,
+          activado: objectToInsert.parentQuestionResponse,
           youtube_key: objectToInsert.questions[0].response,
         },
       };
