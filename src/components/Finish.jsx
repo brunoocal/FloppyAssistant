@@ -201,6 +201,30 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
       }
     });
 
+    if (!initialConfig.bienvenidas.activado) {
+      delete initialConfig.bienvenidas;
+    }
+
+    if (!initialConfig.despedidas.activado) {
+      delete initialConfig.despedidas;
+    }
+
+    if (!initialConfig.moderacion.activado) {
+      delete initialConfig.moderacion;
+    }
+
+    if (!initialConfig.automod.activado) {
+      delete initialConfig.automod;
+    }
+
+    if (!initialConfig.logs.activado) {
+      delete initialConfig.logs;
+    }
+
+    if (!initialConfig.musica.activado) {
+      delete initialConfig.musica;
+    }
+
     sendData(initialConfig);
   };
 

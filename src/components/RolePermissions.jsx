@@ -11,7 +11,7 @@ const RolePermissions = ({ passToFinishModule }) => {
           "Si necesitas más espacios para permisos, configuralo manualmente.",
           {
             position: "bottom-right",
-            autoClose: 4500,
+            autoClose: 5500,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -25,7 +25,7 @@ const RolePermissions = ({ passToFinishModule }) => {
       () =>
         toast.info("¡Recuerda verificar que las IDs sean correctas!", {
           position: "bottom-right",
-          autoClose: 3000,
+          autoClose: 7000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
