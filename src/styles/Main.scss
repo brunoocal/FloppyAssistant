@@ -171,7 +171,6 @@ select {
       display: flex;
       justify-content: center;
       align-items: center;
-      position: relative;
 
       &.finish {
         margin-top: 1vw;
@@ -196,7 +195,7 @@ select {
 
       & > p {
         position: absolute;
-        right: 17%;
+        right: 34vw;
         font-size: 1.226vw;
       }
     }
