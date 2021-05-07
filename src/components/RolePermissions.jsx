@@ -21,8 +21,24 @@ const RolePermissions = ({ passToFinishModule }) => {
         ),
       350
     );
+    const id2 = setTimeout(
+      () =>
+        toast.info("¡Recuerda verificar que las IDs sean correctas!", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }),
+      450
+    );
 
-    return () => clearTimeout(id);
+    return () => {
+      clearTimeout(id);
+      clearTimeout(id2);
+    };
   }, []);
 
   const handleNext = () => {
@@ -47,7 +63,7 @@ const RolePermissions = ({ passToFinishModule }) => {
     });
 
     localStorage.setItem("rolePermissions", JSON.stringify(arrayOfItemValues));
-    passToFinishModule()
+    passToFinishModule();
   };
 
   return (
