@@ -225,6 +225,10 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
       delete initialConfig.musica;
     }
 
+    if (!initialConfig.sugerencias.activado) {
+      delete initialConfig.sugerencias;
+    }
+
     sendData(initialConfig);
   };
 
