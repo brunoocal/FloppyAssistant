@@ -173,7 +173,7 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
     permissionsData.map((permission) => {
       let objectToInsert = {
         [permission.path]: {
-          permiso: permission.response,
+          permiso: parseInt(permission.response),
         },
       };
       initialConfig = {
@@ -228,9 +228,8 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
     if (!initialConfig.sugerencias.activado) {
       delete initialConfig.sugerencias;
     }
-    
+
     delete initialConfig.atajos;
-    
 
     sendData(initialConfig);
   };
