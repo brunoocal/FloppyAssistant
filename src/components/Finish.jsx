@@ -228,6 +228,9 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
     if (!initialConfig.sugerencias.activado) {
       delete initialConfig.sugerencias;
     }
+    
+    delete initialConfig.atajos;
+    
 
     sendData(initialConfig);
   };
