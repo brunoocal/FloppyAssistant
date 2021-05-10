@@ -171,6 +171,7 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
     }
 
     permissionsData.map((permission) => {
+      console.log(permission);
       let objectToInsert = {
         [permission.path]: {
           permiso: Boolean(parseInt(permission.response))
