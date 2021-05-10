@@ -172,20 +172,21 @@ const Finish = React.memo(({ permissionsData, questionsData }) => {
 
     permissionsData.map((permission) => {
       console.log(permission);
-      let objectToInsert = {
-        [permission.path]: {
-          permiso: Boolean(parseInt(permission.response))
-            ? parseInt(permission.response)
-            : 100,
-        },
-      };
-      initialConfig = {
-        ...initialConfig,
-        comandos: {
-          ...initialConfig.comandos,
-          ...objectToInsert,
-        },
-      };
+
+      if (Boolean(parseInt(permission.response))) {
+        let objectToInsert = {
+          [permission.path]: {
+            permiso: permission.response,
+          },
+        };
+        initialConfig = {
+          ...initialConfig,
+          comandos: {
+            ...initialConfig.comandos,
+            ...objectToInsert,
+          },
+        };
+      }
     });
 
     const rolePermissionsData = JSON.parse(
