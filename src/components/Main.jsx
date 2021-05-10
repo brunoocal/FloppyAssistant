@@ -8,7 +8,7 @@ import Hero from "@components/Hero";
 import Finish from "@components/Finish";
 import Module from "@components/Module";
 import PermissionsModules from "@components/PermissionsModules";
-import RolePermissions from "@components/RolePermissions"
+import RolePermissions from "@components/RolePermissions";
 
 const Main = () => {
   const [isHeroActive, setHeroActive] = useState(true);
@@ -240,7 +240,7 @@ const Main = () => {
           question: "¿Quieres que los logs salgan como embed?",
           example: "SI / NO",
           buttons: true,
-          configPath: "canal.editados",
+          configPath: "embed",
           response: "",
         },
         {
@@ -469,7 +469,7 @@ const Main = () => {
           timeout={700}
           classNames="permissions-fade"
         >
-          <RolePermissions passToFinishModule={handleFinishButton}/>
+          <RolePermissions passToFinishModule={handleFinishButton} />
         </CSSTransition>
       )}
 
