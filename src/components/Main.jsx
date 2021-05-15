@@ -62,7 +62,7 @@ const Main = () => {
         },
         {
           question: "Indica el mensaje de bienvenida que quieres utilizar",
-          example: "{user}, gracias a tí, ¡ahora somos {memberCount} miembros!",
+          example: "{user}, gracias a tí, ¡ahora somos {members} miembros!",
           configPath: "mensaje",
           tag: "mensaje-bienvenida",
           response: "",
